@@ -1,0 +1,3 @@
+rootProject.name = 'PaperCups'
+
+include ':app'
