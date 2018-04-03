@@ -1,10 +1,12 @@
 import React, { Component }  from 'react';
 import { Text, View } from 'react-native';
+import axios from 'axios';
 
 class AlbumList extends Component {
 
     componentWillMount(){
-        console.log('hehehe component will mount');
+        axios.get('https://plsworkgod.herokuapp.com/albums')
+        .then(response => console.log(response));    
     }
 
     render(){
