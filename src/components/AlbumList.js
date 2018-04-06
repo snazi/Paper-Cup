@@ -1,33 +1,31 @@
-import React, { Component }  from 'react';
-import { Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { View } from 'react-native';
 import axios from 'axios';
+import AlbumDetail from './AlbumDetail';
 
 class AlbumList extends Component {
+  state = { albums: [] };
 
-    state = { albums: [] };
+  componentWillMount() {
+    axios.get('https://plsworkgod.herokuapp.com/albums')
+      .then(response => this.setState({ albums: response.data }));
+  }
 
-    componentWillMount(){
-        axios.get('https://plsworkgod.herokuapp.com/albums')
-        .then(response => this.setState({ albums: response.data }));    
-    }
+  renderAlbums() {
+    return this.state.albums.map(album =>
+      <AlbumDetail key={album.title} album={album} />
+    );
+  }
 
-    renderAlbums(){
-        return this.state.albums.map( album => 
-            <Text key={ album.title }>{album.title}</Text> 
-        );
-    }
+  render() {
+    console.log(this.state);
 
-    render(){
-
-        console.log(this.state);
-
-        return (
-            <View>
-                {this.renderAlbums()}
-            </View>
-    
-        );
-    }
-    
+    return (
+      <View>
+        {this.renderAlbums()}
+      </View>
+    );
+  }
 }
+
 export default AlbumList;
